@@ -7,7 +7,7 @@ const Quiz = ({
   return (
     <div
       className="card bg-secondary text-light shadow-lg border-0 p-4"
-      style={{ position: "relative" }}
+     style={{maxWidth: '700px', margin: 'auto'}}
     >
       <h5 className="mb-4">
         Q{apiResponse.questionNumber}. {apiResponse.question}
