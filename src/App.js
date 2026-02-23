@@ -1,24 +1,43 @@
-import logo from './logo.svg';
+
 import './App.css';
 
+import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap/dist/js/bootstrap.bundle.js"
+
+import { createBrowserRouter, RouterProvider } from "react-router"
+import FetchQuizs from "./pages/FetchQuizs";
+import RootLayout from "./components/layout/RootLayout"
+import Home from "./pages/Home"
+import GetSavedQuizs, { loader as savedQuizLoader } from './pages/GetSavedQuizs';
+
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <RootLayout />,
+      children: [
+        {
+          index: true, element: <Home />
+        },
+        {
+          path: "quizs",
+          element: <FetchQuizs />
+        },
+        {
+          path: "saved",
+          element: <GetSavedQuizs />,
+          loader: savedQuizLoader
+        }
+      ]
+    },
+
+  ])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <RouterProvider router={router} />
+
+    </>
   );
 }
 
